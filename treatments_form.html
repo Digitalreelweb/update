@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treatments Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 2rem auto;
+            background: #111;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        form label {
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        form input, form button {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 5px;
+            background: #222;
+            color: #fff;
+        }
+        form button {
+            background: #444;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        form button:hover {
+            background: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Treatments Package</h1>
+    <p>Please fill out the form below to get started with the Treatments package.</p>
+    <form id="treatmentsForm">
+        <label for="artist-name">Artist Name</label>
+        <input type="text" id="artist-name" name="entry.73977504" placeholder="Enter your artist name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="entry.1856633882" placeholder="Enter your email" required>
+
+        <label for="instagram">Instagram Name</label>
+        <input type="text" id="instagram" name="entry.1627137581" placeholder="Enter your Instagram handle" required>
+
+        <label for="budget">Budget</label>
+        <input type="text" id="budget" name="entry.1470727266" placeholder="Enter your budget" required>
+
+        <label for="shoot-date">Preferred Shoot Date</label>
+        <input type="date" id="shoot-date" name="entry.1605648734" required>
+
+        <button type="submit">Submit</button>
+    </form>
+    <p class="success-message" id="successMessageTreatments" style="display: none; color: #0f0; font-weight: bold;">Thank you! Your submission has been received.</p>
+    <script>
+        document.getElementById('treatmentsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const successMessage = document.getElementById('successMessageTreatments');
+
+            fetch("https://docs.google.com/forms/d/e/1FAIpQLSeBmRdXETkS_F_8v5IsGV1oacnyUeH-BFW4ZYf7oHqkfj6LCg/formResponse", {
+                method: "POST",
+                body: new FormData(form),
+                mode: "no-cors"
+            }).then(() => {
+                successMessage.style.display = "block";
+                form.reset();
+            }).catch(() => {
+                alert("There was an error submitting the form. Please try again.");
+            });
+        });
+    </script>
+</body>
+</html>
